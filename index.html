@@ -1,0 +1,63 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        <h1 id="count"></h1>
+    </div>
+    <div id="main" class="container" />
+
+</body>
+<footer>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script>
+        weps = {
+            "melee" : ["Knife", "Tazer"],
+            "pistol" : ["CZ75-Auto", "Desert Eagle", "Dual Berettas", "Five-SeveN", "Glock-18", "P2000", "P250", "R8 Revolver", "Tec-9", "USP-S"],
+            "smg" : ["MAC-10", "MP5-SD", "MP7", "MP9", "P90", "PP-Bizon", "UMP-45"],
+            "rifle": ["AK-47", "AUG", "FAMAS", "Galil", "M4A1-S", "M4A4", "SG 553", "AWP", "G3SG1", "SCAR-20", "SSG 08"],
+            "heavy": ["MAG-7", "Nova", "Sawed-Off", "XM1014", "M249", "Negev"],
+            "grenade": ["HE", "Molly"]
+        };
+
+        var count = 0;
+        $('#count').text(count);
+
+
+        jQuery.each(weps, function(key, val) {
+            $('#main').append(
+                $('<div/>')
+                    .attr("id", "gunType_"+key)
+                    .addClass("gunTypeBox row p-1")
+                );
+            jQuery.each(val, function() {
+                $('#gunType_'+key).append(
+                $('<button/>')
+                    .attr("id", "gun_"+this)
+                    .addClass("gunBox btn btn-secondary p-1 m-1")
+                    .text(this)
+                    .click(function(){
+                        if($(this).hasClass("btn-secondary")) {
+                            $(this).removeClass("btn-secondary")
+                            $(this).addClass("btn-primary")
+                            count++;
+                            $('#count').text(count);
+                        } else {
+                            $(this).removeClass("btn-primary")
+                            $(this).addClass("btn-secondary")
+                            count--;
+                            $('#count').text(count);
+                        }
+                    })
+                );               
+            })
+        })
+
+    </script>
+</footer>
+</html>
