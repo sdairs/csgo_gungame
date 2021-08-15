@@ -1,63 +1,129 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div>
-        <h1 id="count"></h1>
-    </div>
-    <div id="main" class="container" />
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <title>CSGO Gun Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="./style/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="main" class="container">
+        <div class="row">
+            <h1 id="count">Score: 0</h1>
+        </div>
+    </div>
 </body>
 <footer>
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
     <script>
         weps = {
-            "melee" : ["Knife", "Tazer"],
-            "pistol" : ["CZ75-Auto", "Desert Eagle", "Dual Berettas", "Five-SeveN", "Glock-18", "P2000", "P250", "R8 Revolver", "Tec-9", "USP-S"],
-            "smg" : ["MAC-10", "MP5-SD", "MP7", "MP9", "P90", "PP-Bizon", "UMP-45"],
-            "rifle": ["AK-47", "AUG", "FAMAS", "Galil", "M4A1-S", "M4A4", "SG 553", "AWP", "G3SG1", "SCAR-20", "SSG 08"],
-            "heavy": ["MAG-7", "Nova", "Sawed-Off", "XM1014", "M249", "Negev"],
-            "grenade": ["HE", "Molly"]
+            "Melee": [
+                { "name": "Knife", "image": "knife" },
+                { "name": "Tazer", "image": "zeus" }
+            ],
+            "Pistols": [
+                { "name": "CZ75", "image": "cz75" },
+                { "name": "Desert Eagle", "image": "deagle" },
+                { "name": "Dual Berettas", "image": "dualies" },
+                { "name": "Five-SeveN", "image": "57" },
+                { "name": "Glock-18", "image": "glock18" },
+                { "name": "P2000", "image": "p2000" },
+                { "name": "P250", "image": "p250" },
+                { "name": "R8 Revolver", "image": "r8" },
+                { "name": "Tec-9", "image": "tec9" },
+                { "name": "USP-S", "image": "usps" },
+            ],
+            "SMGs": [
+                { "name": "MAC-10", "image": "mac10" },
+                { "name": "MP5-SD", "image": "mp5" },
+                { "name": "MP7", "image": "mp7" },
+                { "name": "MP9", "image": "mp9" },
+                { "name": "P90", "image": "p90" },
+                { "name": "PP-Bizon", "image": "bizon" },
+                { "name": "UMP-45", "image": "ump" },
+            ],
+            "Rifles": [
+                { "name": "AK-47", "image": "ak" },
+                { "name": "AUG", "image": "aug" },
+                { "name": "FAMAS", "image": "famas" },
+                { "name": "Galil", "image": "galil" },
+                { "name": "M4A1-S", "image": "m4a1" },
+                { "name": "M4A4", "image": "m4a4" },
+                { "name": "SG 553", "image": "sg" },
+                { "name": "AWP", "image": "awp" },
+                { "name": "G3SG1", "image": "g3" },
+                { "name": "SCAR-20", "image": "scar" },
+                { "name": "SSG 08", "image": "scout" }
+            ],
+            "Heavies": [
+                { "name": "MAG-7", "image": "swag" },
+                { "name": "Nova", "image": "nova" },
+                { "name": "Sawed-Off", "image": "sawn" },
+                { "name": "XM1014", "image": "xm" },
+                { "name": "M249", "image": "m249" },
+                { "name": "Negev", "image": "negev" }
+            ],
+            "Grenades": [
+                { "name": "HE", "image": "he" },
+                { "name": "Molly", "image": "molly" }
+            ]
         };
 
         var count = 0;
-        $('#count').text(count);
 
+        function updateScore() {
+            $('#count').text("Score: " + count);
+        }
 
-        jQuery.each(weps, function(key, val) {
+        jQuery.each(weps, function (key, val) {
             $('#main').append(
                 $('<div/>')
-                    .attr("id", "gunType_"+key)
-                    .addClass("gunTypeBox row p-1")
+                    .append(
+                        $('<div/>')
+                            .addClass('row p-1 gunTypeTitleRow')
+                            .append($('<h1/>')
+                                .text(key)),
+                        $('<div/>')
+                            .attr("id", "gunType_" + key)
+                            .addClass("gunTypeButtonRow row row-cols-4 p-1")
+                    )
+            );
+            jQuery.each(val, function () {
+                $('#gunType_' + key).append(
+                    $('<div/>')
+                        .addClass('gunBox col')
+                        .append(
+                            $('<button/>')
+                                .attr("id", "gun_" + this.name)
+                                .addClass("gunButton btn btn-secondary p-1 m-1")
+                                .text(this.name)
+                                .click(function () {
+                                    if ($(this).hasClass("btn-secondary")) {
+                                        $(this).removeClass("btn-secondary")
+                                        $(this).addClass("btn-primary")
+                                        count++;
+                                        updateScore();
+                                    } else {
+                                        $(this).removeClass("btn-primary")
+                                        $(this).addClass("btn-secondary")
+                                        count--;
+                                        updateScore();
+                                    }
+                                }).append("<img src=./images/" + this.image + ".webp />")
+                        )
                 );
-            jQuery.each(val, function() {
-                $('#gunType_'+key).append(
-                $('<button/>')
-                    .attr("id", "gun_"+this)
-                    .addClass("gunBox btn btn-secondary p-1 m-1")
-                    .text(this)
-                    .click(function(){
-                        if($(this).hasClass("btn-secondary")) {
-                            $(this).removeClass("btn-secondary")
-                            $(this).addClass("btn-primary")
-                            count++;
-                            $('#count').text(count);
-                        } else {
-                            $(this).removeClass("btn-primary")
-                            $(this).addClass("btn-secondary")
-                            count--;
-                            $('#count').text(count);
-                        }
-                    })
-                );               
             })
         })
 
     </script>
 </footer>
+
 </html>
