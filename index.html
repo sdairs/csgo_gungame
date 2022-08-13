@@ -76,11 +76,13 @@
                 { "name": "Molly", "image": "molly" }
             ]
         };
+        
+        var unique_weapon_count = Object.values(weps).flat().length;
 
         var count = 0;
 
         function updateScore() {
-            $('#count').text("Score: " + count);
+            $('#count').text("Complete: " + count + " of " + unique_weapon_count);
         }
 
         jQuery.each(weps, function (key, val) {
