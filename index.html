@@ -13,7 +13,7 @@
 <body>
     <div id="main" class="container">
         <div class="row">
-            <h1 id="count">Score: 0</h1>
+            <h1 id="count"></h1>
         </div>
     </div>
 </body>
@@ -84,6 +84,8 @@
         function updateScore() {
             $('#count').text("Complete: " + count + " of " + unique_weapon_count);
         }
+        
+        updateScore();
 
         jQuery.each(weps, function (key, val) {
             $('#main').append(
